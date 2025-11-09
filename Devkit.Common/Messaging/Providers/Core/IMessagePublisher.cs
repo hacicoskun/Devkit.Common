@@ -7,13 +7,13 @@ public interface IMessagePublisher
     Task PublishAsync<T>(T message, CancellationToken cancellationToken = default);
 }
 
-public class MessagePublisher(IPublishEndpoint publishEndpoint) : IMessagePublisher
+public class MessagePublisher(IBus bus) : IMessagePublisher
 {
     public async Task PublishAsync<T>(T message, CancellationToken cancellationToken = default)
     {
         if (message is null)
             throw new ArgumentNullException(nameof(message));
 
-        await publishEndpoint.Publish(message, cancellationToken);
+        await bus.Publish(message, cancellationToken);
     }
 }

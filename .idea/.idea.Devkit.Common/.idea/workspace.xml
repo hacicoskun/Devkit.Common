@@ -10,6 +10,8 @@
   <component name="ChangeListManager">
     <list default="true" id="31393289-db7e-4886-87fd-1b768bdbc7f9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Devkit.Common/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Devkit.Common/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Devkit.Common/Messaging/Providers/Core/IMessagePublisher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Devkit.Common/Messaging/Providers/Core/IMessagePublisher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Devkit.Sample.Api/Controllers/OrdersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Devkit.Sample.Api/Controllers/OrdersController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Devkit.Sample.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Devkit.Sample.Api/appsettings.Development.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Devkit.Sample.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Devkit.Sample.Api/appsettings.json" afterDir="false" />
     </list>
@@ -42,7 +44,8 @@
   &quot;keyToString&quot;: {
     &quot;.NET Launch Settings Profile.Devkit.Sample.Api: http.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -93,6 +96,8 @@
       <updated>1762685923735</updated>
       <workItem from="1762685924913" duration="5295000" />
       <workItem from="1762691714772" duration="11347000" />
+      <workItem from="1762703109817" duration="1467000" />
+      <workItem from="1762710109552" duration="138000" />
     </task>
     <servers />
   </component>
