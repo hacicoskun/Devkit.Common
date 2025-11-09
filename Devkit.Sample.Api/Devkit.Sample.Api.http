@@ -1,0 +1,6 @@
+@Devkit.Sample.Api_HostAddress = http://localhost:5100
+
+GET {{Devkit.Sample.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
