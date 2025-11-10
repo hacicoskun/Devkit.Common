@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using Devkit.Sample.Api.Messaging.Models.Events;
+using MassTransit;
 
 namespace Devkit.Sample.Api.Messaging;
 
