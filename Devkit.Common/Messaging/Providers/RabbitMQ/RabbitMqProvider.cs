@@ -25,7 +25,7 @@ public class RabbitMqProvider : IMessageBusProvider
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host(options.Host, options.VirtualHost ?? "/", h =>
+                cfg.Host(options.Host, options.RabbitMQ?.VirtualHost ?? "/", h =>
                 {
                     if (!string.IsNullOrWhiteSpace(options.Username))
                         h.Username(options.Username);
