@@ -9,7 +9,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 
-builder.Services.AddMessaging<AppDbContext>(
+builder.Services.AddKafka<AppDbContext>(
     builder.Configuration,
     consumerAssembly: typeof(Program).Assembly,
     enableConsumers: true,

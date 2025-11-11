@@ -6,11 +6,12 @@ using Devkit.Sample.Api.Messaging.Models.Events;
 using Devkit.Sample.Api.Messaging.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Devkit.Sample.Api.Controllers;
+namespace Devkit.Sample.Api.Net10.Controllers;
+
 
 [ApiController]
 [Route("[controller]")]
-public class OrdersController(AppDbContext context, IPublisher bus) : ControllerBase
+public class OrdersController(AppDbContext context, IPublisher publisher) : ControllerBase
 {
     [HttpPost("publish")]
     public async Task<IActionResult> PublishOrder(string product, decimal price)
@@ -21,7 +22,7 @@ public class OrdersController(AppDbContext context, IPublisher bus) : Controller
             var order = new Order { Product = product, Price = price };
             context.Orders.Add(order); 
 
-            await bus.PublishAsync(new OrderCreatedEvent(order.Id, order.Product, order.Price));
+            await publisher.PublishAsync(new OrderCreatedEvent(order.Id, order.Product, order.Price));
 
             await transaction.CommitAsync();
             return Ok(new { message = "Order published", order.Id, order.Product, order.Price });
@@ -42,7 +43,7 @@ public class OrdersController(AppDbContext context, IPublisher bus) : Controller
             if (order is null)
                 return NotFound(new { message = $"Order {orderId} not found" });
 
-            await bus.SendAsync(new GenerateInvoiceCommand(order.Id, order.Price));
+            await publisher.SendAsync(new GenerateInvoiceCommand(order.Id, order.Price));
 
             return Ok(new { message = "Command sent successfully", order.Id });
         }
@@ -57,7 +58,7 @@ public class OrdersController(AppDbContext context, IPublisher bus) : Controller
     {
         try
         {
-            var response = await bus.RequestAsync<GetOrderRequest, GetOrderResponse>(
+            var response = await publisher.RequestAsync<GetOrderRequest, GetOrderResponse>(
                 new GetOrderRequest(orderId)
             );
 

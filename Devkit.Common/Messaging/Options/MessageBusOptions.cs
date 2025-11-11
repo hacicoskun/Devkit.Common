@@ -1,23 +1,32 @@
-﻿namespace Devkit.Common.Messaging.Options;
-
-public class MessageBusOptions
+﻿namespace Devkit.Common.Messaging.Options
 {
-    public string? Provider { get; set; }   // RabbitMQ, Kafka, etc.
-    public string? Host { get; set; }
-    public int? Port { get; set; }
-    public string? VirtualHost { get; set; }
-    public string? Username { get; set; }
-    public string? Password { get; set; }
+    public class MessageBusOptions
+    {
+        public string? Provider { get; set; }
+        public string? Host { get; set; }
+        public string? Username { get; set; }
+        public string? Password { get; set; }
 
-    // Exchange / Topic / Queue gibi kavramlar için genel alan
-    public string? ChannelName { get; set; }
+        public RabbitMqOptions? RabbitMQ { get; set; }
+        public KafkaOptions? Kafka { get; set; }
+        public RetryOptions? DefaultRetry { get; set; }
+    }
 
-    // Routing veya mesaj tipi (direct, fanout, topic vb.)
-    public string? RoutingType { get; set; }
+    public class RabbitMqOptions
+    {
+        public int Port { get; set; } = 5672;
+        public string? VirtualHost { get; set; } = "/";
+    }
 
-    // QoS, priority gibi durumlar
-    public int? PriorityLevel { get; set; }
+    public class KafkaOptions
+    {
+        public string? SecurityProtocol { get; set; }
+        public Dictionary<string, string>? AdditionalConfig { get; set; }
+    }
 
-    // Provider’a özel key-value ayarları
-    public Dictionary<string, string>? AdditionalProperties { get; set; }
+    public class RetryOptions
+    {
+        public int RetryLimit { get; set; } = 3;
+        public int InitialIntervalSeconds { get; set; } = 5;
+    }
 }
