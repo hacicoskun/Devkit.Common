@@ -9,73 +9,55 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Devkit.Common.Messaging.Extensions
-{  
+namespace Devkit.Common.Messaging.Extensions;
 
-    public static class ServiceCollectionExtensions
+public static class ServiceCollectionExtensions
+{
+    public static void AddMessaging(this IServiceCollection services, IConfiguration configuration, Assembly? consumerAssembly = null, bool useConsumers = true, Action<IBusRegistrationConfigurator>? configureBus = null)
     {
-        private static MessageBusOptions GetMessagingOptions(IConfiguration configuration)
+        AddMessagingCore(services, configuration, consumerAssembly, useConsumers, outboxConfigurator: null, configureBus);
+    }
+
+    public static void AddMessagingWithOutbox<TContext>(this IServiceCollection services, IConfiguration configuration, Assembly? consumerAssembly = null, bool useConsumers = true, Action<IBusRegistrationConfigurator>? configureBus = null)
+        where TContext : DbContext
+    {
+        AddMessagingCore(services, configuration, consumerAssembly, useConsumers, outboxConfigurator: x => x.AddEfCoreOutbox<TContext>(), configureBus);
+    }
+
+    private static void AddMessagingCore(IServiceCollection services, IConfiguration configuration, Assembly? consumerAssembly, bool useConsumers, Action<IBusRegistrationConfigurator>? outboxConfigurator,
+        Action<IBusRegistrationConfigurator>? configureBus)
+    {
+        var options = configuration.GetSection("Messaging").Get<MessageBusOptions>()
+                      ?? throw new InvalidOperationException("Messaging configuration missing.");
+
+        consumerAssembly ??= Assembly.GetCallingAssembly();
+
+        void Configure(IBusRegistrationConfigurator x)
         {
-            return configuration.GetSection("Messaging").Get<MessageBusOptions>()
-                  ?? throw new InvalidOperationException("Messaging configuration missing.");
+            if (useConsumers)
+                x.AddConsumers(consumerAssembly);
+
+            outboxConfigurator?.Invoke(x);
+
+            configureBus?.Invoke(x);
         }
 
-        public static void AddRabbitMq<TContext>(
-            this IServiceCollection services,
-            IConfiguration configuration,
-            Assembly? consumerAssembly = null,
-            bool enableConsumers = true,
-            bool enableOutbox = false,
-            Action<IBusRegistrationConfigurator>? configureBus = null)
-            where TContext : DbContext
+        switch (options.Provider!.ToLowerInvariant())
         {
-            _ = GetMessagingOptions(configuration);
-            
-            consumerAssembly ??= Assembly.GetCallingAssembly();
+            case "rabbitmq":
+                new RabbitMqProvider().Configure(services, configuration, Configure);
+                services.AddScoped<RabbitMqPublisher>();
+                break;
 
-            new RabbitMqProvider().Configure(services, configuration, x =>
-            {
-                if (enableConsumers)
-                    x.AddConsumers(consumerAssembly);
+            case "kafka":
+                new KafkaProvider().Configure(services, configuration, Configure);
+                services.AddScoped<KafkaPublisher>();
+                break;
 
-                if (enableOutbox)
-                    x.AddEfCoreOutbox<TContext>();
-
-                configureBus?.Invoke(x);
-            });
-
-            services.AddScoped<RabbitMqPublisher>();
-            services.AddScoped<IPublisher, Publisher>();
-            
+            default:
+                throw new NotSupportedException($"Unsupported provider: {options.Provider}");
         }
 
-        public static void AddKafka<TContext>(
-            this IServiceCollection services,
-            IConfiguration configuration,
-            Assembly? consumerAssembly = null,
-            bool enableConsumers = true,
-            bool enableOutbox = false,
-            Action<IBusRegistrationConfigurator>? configureBus = null)
-            where TContext : DbContext
-        {
-            _ = GetMessagingOptions(configuration);
-             
-
-            consumerAssembly ??= Assembly.GetCallingAssembly();
-
-            new KafkaProvider().Configure(services, configuration, x =>
-            {
-                if (enableConsumers)
-                    x.AddConsumers(consumerAssembly);
-
-                if (enableOutbox)
-                    x.AddEfCoreOutbox<TContext>();
-
-                configureBus?.Invoke(x);
-            });
-
-            services.AddScoped<KafkaPublisher>(); 
-            services.AddScoped<IPublisher, Publisher>();
-        }
+        services.AddScoped<IPublisher, Publisher>();
     }
 }

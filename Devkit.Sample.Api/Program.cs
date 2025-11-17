@@ -1,6 +1,6 @@
+using Devkit.Common.Caching.Extensions;
 using Devkit.Common.Messaging.Extensions;
 using Devkit.Sample.Api.Data;
-using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,13 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+ 
 
-builder.Services.AddKafka<AppDbContext>(
+builder.Services.AddMessagingWithOutbox<AppDbContext>(
     builder.Configuration,
     consumerAssembly: typeof(Program).Assembly,
-    enableConsumers: true,
-    enableOutbox: true
+    useConsumers: true
 ); 
+
+builder.Services.AddCacheProvider(builder.Configuration); 
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -26,6 +28,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+   
 }
 
 app.MapControllers();
