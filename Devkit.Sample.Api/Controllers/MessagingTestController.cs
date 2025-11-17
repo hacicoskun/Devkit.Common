@@ -10,7 +10,7 @@ namespace Devkit.Sample.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class OrdersController(AppDbContext context, IPublisher bus) : ControllerBase
+public class MessagingTestController(AppDbContext context, IPublisher bus) : ControllerBase
 {
     [HttpPost("publish")]
     public async Task<IActionResult> PublishOrder(string product, decimal price)
