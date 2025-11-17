@@ -24,13 +24,11 @@ Amaç, farklı projelerde **ortak çözümleri** yeniden kullanılabilir hale ge
 ## 🧩 Hızlı Başlangıç
 
 
-```csharp
-builder.Services.AddMessaging<AppDbContext>(
+🧩 Hızlı Başlangıç
+builder.Services.AddMessagingWithOutbox<AppDbContext>(
     builder.Configuration,
     consumerAssembly: typeof(Program).Assembly,
-    enableConsumers: true,
-    enableOutbox: true
-); 
+    useConsumers: true
+);
 
-```csharp
-builder.Services.AddCacheProvider(builder.Configuration); 
+builder.Services.AddCacheProvider(builder.Configuration);
