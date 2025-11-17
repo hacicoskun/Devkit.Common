@@ -1,35 +1,51 @@
-# Devkit.Common 🚀  
-**Uygulama altyapılarını sadeleştiren .NET kütüphanesi**
+# 🚀 Devkit.Common: .NET Altyapısını Sadeleştirme Gücü
 
-**Devkit.Common**, .NET projelerinde tekrarlayan altyapı ihtiyaçlarını kolayca yönetmek için geliştirilmiş bir kütüphanedir.  
-Amaç, farklı projelerde **ortak çözümleri** yeniden kullanılabilir hale getirerek, daha **tutarlı** ve **bakımı kolay** sistemler kurmaktır.
+**.NET projelerinde tekrarlayan altyapı ihtiyaçlarını kolayca yönetmek için geliştirilmiş kapsamlı bir kütüphane.**
 
----
+Devkit.Common, .NET geliştiricilerinin sürekli karşılaştığı **tekrarlayan altyapı zorluklarını** çözmek için tasarlanmıştır. Amacımız, projelerinizde **tutarlılığı** ve **bakım kolaylığını** en üst düzeye çıkarmak için kanıtlanmış ortak çözümleri **tekrar kullanılabilir** bileşenlere dönüştürmektir.
 
-## ⚙️ Şu Anda Neler Var?
-- **Outbox & Inbox Pattern** desteğiyle güvenilir mesajlaşma  
-- **RabbitMQ entegrasyonu**  
-- **Çoklu broker desteği** (Kafka ve diğerleri için hazır yapı)  
-- **InMemory / Redis / Hybrid cache
----
-
-## 🔜 Planlanan Özellikler
-- **Hangfire** entegrasyonu  
-- **Job Scheduler / Background Task** desteği  
-- **Logging & Telemetri** bileşenleri  
-- **NuGet paket yayını**
+> ✨ **Daha az boilerplate, daha fazla iş mantığı.** Projelerinizi daha hızlı, daha güvenilir ve daha yönetilebilir hale getirin.
 
 ---
 
-## 🧩 Hızlı Başlangıç
+## ⚙️ Mevcut Özellikler (Hemen Kullanıma Hazır!)
 
+Bu kütüphane, dağıtık sistemler ve performans odaklı uygulamalar için kritik öneme sahip temel özellikleri içerir:
 
-🧩 Hızlı Başlangıç
+| Kategori | Özellik | Açıklama |
+| :--- | :--- | :--- |
+| **Mesajlaşma** | **Outbox & Inbox Pattern** | Veritabanı işlemleri ve mesaj gönderme/alma arasında tutarlılığı garanti eden sağlam destek. |
+| **Mesaj Broker** | **RabbitMQ Entegrasyonu** | Endüstri standardı mesaj broker'ı ile hızlı ve kolay entegrasyon. |
+| **Broker Mimarisi** | **Çoklu Broker Desteği** | İhtiyaç halinde **Kafka** gibi farklı mesaj broker'larına geçiş yapabilmeniz için esnek altyapı. |
+| **Önbellekleme** | **InMemory / Redis / Hybrid Cache** | Uygulamanızın performansını artırmak için esnek önbellek çözümleri. |
 
+---
+
+## 🔜 Yol Haritası (Gelecek Özellikler)
+
+Geliştirme sürecindeki heyecan verici eklemelerle kütüphanemizi güçlendirmeye devam ediyoruz:
+
+* ⚙️ **Job Scheduler / Background Task Desteği:** Güvenilir arka plan işlemleri ve görev zamanlayıcı mekanizmaları.
+* ⏳ **Hangfire Entegrasyonu:** Güçlü ve kalıcı arka plan görev yönetimi için popüler bir çözümün entegrasyonu.
+* 📊 **Logging & Telemetri Bileşenleri:** Merkezi izleme ve analiz için kapsamlı bileşenler.
+* 📦 **Resmi NuGet Paket Yayını:** Kolay kurulum ve yönetim için tüm bileşenlerin NuGet üzerinden erişilebilir hale getirilmesi.
+
+---
+
+## 🧩 Hızlı Başlangıç: Dakikalar İçinde Hazır!
+
+**Devkit.Common**'ı projenize entegre etmek, standart .NET Bağımlılık Enjeksiyonu yapısını kullanarak yalnızca birkaç satır kod gerektirir.
+
+### **1. Güvenilir Mesajlaşma ve Outbox Entegrasyonu**
+
+Uygulamanızın `Program.cs` dosyasına aşağıdaki kodu ekleyerek güvenilir mesajlaşma altyapısını anında aktif edin:
+
+```csharp
+// Devkit.Common'ı kullanarak güvenilir mesajlaşma (Outbox) servisini ekler.
 builder.Services.AddMessagingWithOutbox<AppDbContext>(
     builder.Configuration,
-    consumerAssembly: typeof(Program).Assembly,
-    useConsumers: true
+    // Consumer'ların hangi Assembly'de olduğunu belirtiriz.
+    consumerAssembly: typeof(Program).Assembly, 
+    // Consumer'ların bu serviste çalıştırılmasını sağlar.
+    useConsumers: true 
 );
-
-builder.Services.AddCacheProvider(builder.Configuration);
