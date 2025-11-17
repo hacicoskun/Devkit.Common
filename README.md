@@ -25,6 +25,7 @@ Amaç, farklı projelerde **ortak çözümleri** yeniden kullanılabilir hale ge
 
 
 🧩 Hızlı Başlangıç
+
 builder.Services.AddMessagingWithOutbox<AppDbContext>(
     builder.Configuration,
     consumerAssembly: typeof(Program).Assembly,
