@@ -49,3 +49,8 @@ builder.Services.AddMessagingWithOutbox<AppDbContext>(
     // Consumer'ların bu serviste çalıştırılmasını sağlar.
     useConsumers: true 
 );
+// Devkit.Common'ı kullanarak cache servisini ekler.
+
+builder.Services.AddCacheProvider(builder.Configuration); 
+
+
