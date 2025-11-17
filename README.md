@@ -10,7 +10,7 @@ Amaç, farklı projelerde **ortak çözümleri** yeniden kullanılabilir hale ge
 - **Outbox & Inbox Pattern** desteğiyle güvenilir mesajlaşma  
 - **RabbitMQ entegrasyonu**  
 - **Çoklu broker desteği** (Kafka ve diğerleri için hazır yapı)  
-
+- **InMemory / Redis / Hybrid cache
 ---
 
 ## 🔜 Planlanan Özellikler
@@ -23,6 +23,7 @@ Amaç, farklı projelerde **ortak çözümleri** yeniden kullanılabilir hale ge
 
 ## 🧩 Hızlı Başlangıç
 
+
 ```csharp
 builder.Services.AddMessaging<AppDbContext>(
     builder.Configuration,
@@ -30,3 +31,6 @@ builder.Services.AddMessaging<AppDbContext>(
     enableConsumers: true,
     enableOutbox: true
 ); 
+
+```csharp
+builder.Services.AddCacheProvider(builder.Configuration); 
