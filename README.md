@@ -41,6 +41,15 @@ Geliştirme sürecindeki heyecan verici eklemelerle kütüphanemizi güçlendirm
 Uygulamanızın `Program.cs` dosyasına aşağıdaki kodu ekleyerek güvenilir mesajlaşma altyapısını anında aktif edin:
 
 ```csharp
+// Devkit.Common'ı kullanarak güvenilir mesajlaşma servisini ekler.
+builder.Services.AddMessaging(
+    builder.Configuration,
+    // Consumer'ların hangi Assembly'de olduğunu belirtiriz.
+    consumerAssembly: typeof(Program).Assembly, 
+    // Consumer'ların bu serviste çalıştırılmasını sağlar.
+    useConsumers: true 
+);
+
 // Devkit.Common'ı kullanarak güvenilir mesajlaşma (Outbox) servisini ekler.
 builder.Services.AddMessagingWithOutbox<AppDbContext>(
     builder.Configuration,
