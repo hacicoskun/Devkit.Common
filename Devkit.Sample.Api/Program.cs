@@ -8,9 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
- 
-
-builder.Services.AddMessagingWithOutbox<AppDbContext>(
+ builder.Services.AddMessagingWithOutbox<AppDbContext>(
     builder.Configuration,
     consumerAssembly: typeof(Program).Assembly,
     useConsumers: true

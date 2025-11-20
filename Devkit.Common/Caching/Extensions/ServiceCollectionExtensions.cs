@@ -36,7 +36,7 @@ public static class ServiceCollectionExtensions
                 break;
 
             case CacheProviderType.Hybrid:
-                services.AddMemoryCache();
+                services.AddHybridCache();
                 services.AddSingleton<InMemoryCacheProvider>();
 
                 services.AddStackExchangeRedisCache(redisOptions =>
