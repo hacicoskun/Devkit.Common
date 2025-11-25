@@ -18,6 +18,7 @@ Bu kütüphane, dağıtık sistemler ve performans odaklı uygulamalar için kri
 | **Mesaj Broker** | **RabbitMQ Entegrasyonu** | Endüstri standardı mesaj broker'ı ile hızlı ve kolay entegrasyon. |
 | **Broker Mimarisi** | **Çoklu Broker Desteği** | İhtiyaç halinde **Kafka** gibi farklı mesaj broker'larına geçiş yapabilmeniz için esnek altyapı. |
 | **Önbellekleme** | **InMemory / Redis / Hybrid Cache** | Uygulamanızın performansını artırmak için esnek önbellek çözümleri. |
+| **Job** | **Hangfire / Quartz** | Uygulamanız için tekrarlayan iş yöneticisi. |
 
 ---
 
@@ -25,8 +26,6 @@ Bu kütüphane, dağıtık sistemler ve performans odaklı uygulamalar için kri
 
 Geliştirme sürecindeki heyecan verici eklemelerle kütüphanemizi güçlendirmeye devam ediyoruz:
 
-* ⚙️ **Job Scheduler / Background Task Desteği:** Güvenilir arka plan işlemleri ve görev zamanlayıcı mekanizmaları.
-* ⏳ **Hangfire Entegrasyonu:** Güçlü ve kalıcı arka plan görev yönetimi için popüler bir çözümün entegrasyonu.
 * 📊 **Logging & Telemetri Bileşenleri:** Merkezi izleme ve analiz için kapsamlı bileşenler.
 * 📦 **Resmi NuGet Paket Yayını:** Kolay kurulum ve yönetim için tüm bileşenlerin NuGet üzerinden erişilebilir hale getirilmesi.
 
@@ -59,7 +58,9 @@ builder.Services.AddMessagingWithOutbox<AppDbContext>(
     useConsumers: true 
 );
 
-// Devkit.Common'ı kullanarak cache servisini ekler.
+// Cache
 builder.Services.AddCacheProvider(builder.Configuration); 
 
+//Job
+builder.Services.AddJobScheduler(builder.Configuration); 
 
