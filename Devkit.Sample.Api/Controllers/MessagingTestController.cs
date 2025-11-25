@@ -1,4 +1,4 @@
-﻿using Devkit.Common.Messaging.Providers.Core;
+﻿using Devkit.Common.Messaging.Core;
 using Devkit.Sample.Api.Data;
 using Devkit.Sample.Api.Data.Entities;
 using Devkit.Sample.Api.Messaging.Models.Commands;
