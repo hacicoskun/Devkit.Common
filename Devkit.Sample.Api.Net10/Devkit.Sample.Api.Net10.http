@@ -1,6 +1,0 @@
-@Devkit.Sample.Api.Net10_HostAddress = http://localhost:5173
-
-GET {{Devkit.Sample.Api.Net10_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

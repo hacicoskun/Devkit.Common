@@ -9,7 +9,7 @@
     <ItemGroup>
         <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.11">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
           <PrivateAssets>all</PrivateAssets>
         </PackageReference>
@@ -18,7 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Devkit.Common\Devkit.Common.csproj" />
+      <ProjectReference Include="..\Devkit.Common.Caching\Devkit.Common.Caching.csproj" />
+      <ProjectReference Include="..\Devkit.Common.Jobs\Devkit.Common.Jobs.csproj" />
+      <ProjectReference Include="..\Devkit.Common.Messaging\Devkit.Common.Messaging.csproj" />
     </ItemGroup>
 
 </Project>
