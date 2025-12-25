@@ -21,7 +21,7 @@ namespace Devkit.Common.Identity.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddDevkitIdentity(
+        public static IServiceCollection AddIdentity(
             this IServiceCollection services,
             IConfiguration configuration,
             IWebHostEnvironment environment)
@@ -43,7 +43,7 @@ namespace Devkit.Common.Identity.Extensions
             return services;
         }
 
-        public static IServiceCollection AddDevkitIdentity<TContext>(
+        public static IServiceCollection AddIdentity<TContext>(
             this IServiceCollection services,
             IConfiguration configuration,
             IWebHostEnvironment environment)

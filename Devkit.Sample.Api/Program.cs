@@ -20,8 +20,8 @@ builder.Services.AddMessagingWithOutbox<AppDbContext>(
 );
 
 builder.Services.AddCacheProvider(builder.Configuration);
-builder.Services.AddDevkitIdentity(builder.Configuration, builder.Environment); //Keycloak
-//builder.Services.AddDevkitIdentity<AppDbContext>(builder.Configuration, builder.Environment); AspnetIdentity
+builder.Services.AddIdentity(builder.Configuration, builder.Environment); //Keycloak
+//builder.Services.AddIdentity<AppDbContext>(builder.Configuration, builder.Environment); AspnetIdentity
 builder.Services.AddJobScheduler(builder.Configuration);
 builder.Services.AddTransient<DateTimeLoggerJob>();
 
