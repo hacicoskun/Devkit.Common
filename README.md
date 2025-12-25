@@ -19,6 +19,7 @@ Bu kütüphane, dağıtık sistemler ve performans odaklı uygulamalar için kri
 | **Broker Mimarisi** | **Çoklu Broker Desteği** | İhtiyaç halinde **Kafka** gibi farklı mesaj broker'larına geçiş yapabilmeniz için esnek altyapı. |
 | **Önbellekleme** | **InMemory / Redis / Hybrid Cache** | Uygulamanızın performansını artırmak için esnek önbellek çözümleri. |
 | **Job** | **Hangfire / Quartz** | Uygulamanız için tekrarlayan iş yöneticisi. |
+| **Identity** | **Keycloak / AspnetIdentity** | Kullanıcı ve rol yönetimi. |
 
 ---
 
@@ -62,5 +63,17 @@ builder.Services.AddMessagingWithOutbox<AppDbContext>(
 builder.Services.AddCacheProvider(builder.Configuration); 
 
 //Job
-builder.Services.AddJobScheduler(builder.Configuration); 
+builder.Services.AddJobScheduler(builder.Configuration);
+
+// Keycloak Kullanımı (Merkezi Auth Sunucusu)
+// appsettings.json üzerinden "Provider": "Keycloak" ayarlanmalıdır.
+builder.Services.AddDevkitIdentity(builder.Configuration, builder.Environment);
+
+// AspNetIdentity Kullanımı (Veritabanı Tabanlı JWT)
+// appsettings.json üzerinden "Provider": "AspNetIdentity" ayarlanmalıdır.
+// Kendi DbContext'inizi (<AppDbContext>) generic olarak belirtmeniz gerekir.
+// AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+builder.Services.AddDevkitIdentity<AppDbContext>(builder.Configuration, builder.Environment);
+
+
 
