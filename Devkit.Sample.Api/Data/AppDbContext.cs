@@ -1,12 +1,10 @@
-﻿using Devkit.Common.Identity.Core.Entities;
-using Devkit.Sample.Api.Data.Entities;
+﻿using Devkit.Sample.Api.Data.Entities;
 using MassTransit;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Devkit.Sample.Api.Data;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Order> Orders => Set<Order>();
 
