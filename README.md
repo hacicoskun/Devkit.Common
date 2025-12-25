@@ -73,7 +73,7 @@ builder.Services.AddDevkitIdentity(builder.Configuration, builder.Environment);
 // appsettings.json üzerinden "Provider": "AspNetIdentity" ayarlanmalıdır.
 // Kendi DbContext'inizi (<AppDbContext>) generic olarak belirtmeniz gerekir.
 // AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
-builder.Services.AddDevkitIdentity<AppDbContext>(builder.Configuration, builder.Environment);
+builder.Services.AddIdentity<AppDbContext>(builder.Configuration, builder.Environment);
 
 
 
