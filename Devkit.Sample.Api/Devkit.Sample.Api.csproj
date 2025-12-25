@@ -18,9 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Devkit.Common.Caching\Devkit.Common.Caching.csproj" />
-      <ProjectReference Include="..\Devkit.Common.Jobs\Devkit.Common.Jobs.csproj" />
-      <ProjectReference Include="..\Devkit.Common.Messaging\Devkit.Common.Messaging.csproj" />
+      <ProjectReference Include="..\Devkit.Common\Devkit.Common.csproj" />
     </ItemGroup>
 
 </Project>
