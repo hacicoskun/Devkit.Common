@@ -3,9 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IsPackable>true</IsPackable>
         <PackageId>Devkit.Common</PackageId>
         <Version>1.0.0</Version>
-        <Description>Devkit unified library combining messaging, caching and job scheduling.</Description>
+        <Authors>Hacı Coşkun</Authors>
+        <Description>Devkit için temel çekirdek kütüphane.</Description>
+        <RepositoryUrl>https://github.com/hacicoskun/Devkit.Common</RepositoryUrl>
     </PropertyGroup>
  
     <ItemGroup>

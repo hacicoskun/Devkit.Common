@@ -3,17 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
- 
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Nullable>enable</Nullable> 
+        <IsPackable>true</IsPackable>
         <PackageId>Devkit.Common.Jobs</PackageId>
         <Version>1.0.0</Version>
-        <Authors>Devkit Team</Authors>
-        <Company>Devkit</Company>
-        <Description>Cross-provider Job Scheduling (Hangfire and Quartz) for PostgreSQL/MSSQL-based .NET apps.</Description>
-        <PackageTags>jobs;scheduler;hangfire;quartz;postgresql;mssql</PackageTags>
-        <RepositoryUrl>https://github.com/devkit</RepositoryUrl>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Authors>Hacı Coşkun</Authors>
+        <Description>Arka plan işleri (Background Jobs) modülü.</Description>
     </PropertyGroup>
 
     <ItemGroup>
