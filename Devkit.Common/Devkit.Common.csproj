@@ -10,12 +10,15 @@
         <Description>Devkit için temel çekirdek kütüphane.</Description>
         <RepositoryUrl>https://github.com/hacicoskun/Devkit.Common</RepositoryUrl>
     </PropertyGroup>
- 
+
     <ItemGroup>
-      <ProjectReference Include="..\Devkit.Common.Caching\Devkit.Common.Caching.csproj" />
-      <ProjectReference Include="..\Devkit.Common.Identity\Devkit.Common.Identity.csproj" />
-      <ProjectReference Include="..\Devkit.Common.Jobs\Devkit.Common.Jobs.csproj" />
-      <ProjectReference Include="..\Devkit.Common.Messaging\Devkit.Common.Messaging.csproj" />
+        <ProjectReference Include="..\Devkit.Common.Caching\Devkit.Common.Caching.csproj"/>
+        <ProjectReference Include="..\Devkit.Common.Identity\Devkit.Common.Identity.csproj"/>
+        <ProjectReference Include="..\Devkit.Common.Jobs\Devkit.Common.Jobs.csproj"/>
+        <ProjectReference Include="..\Devkit.Common.Messaging\Devkit.Common.Messaging.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
 </Project>
