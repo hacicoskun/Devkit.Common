@@ -1,0 +1,21 @@
+﻿<Project>
+  <PropertyGroup>
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <NoWarn>$(NoWarn);EXTEXP0018</NoWarn>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion> <Version>1.0.0</Version>
+    <Authors>Hacı Coşkun</Authors>
+    <Company>Devkit</Company>
+    <Description>Devkit modüler altyapı kütüphanesi.</Description>
+    <RepositoryUrl>https://github.com/hacicoskun/Devkit.Common</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>
