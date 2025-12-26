@@ -9,6 +9,8 @@
         <Version>1.0.0</Version>
         <Authors>Hacı Coşkun</Authors>
         <Description>MassTransit, RabbitMQ ve Kafka mesajlaşma modülü.</Description>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
     </PropertyGroup>
 
     <ItemGroup>

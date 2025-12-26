@@ -9,6 +9,7 @@
         <Authors>Hacı Coşkun</Authors>
         <Description>Devkit için temel çekirdek kütüphane.</Description>
         <RepositoryUrl>https://github.com/hacicoskun/Devkit.Common</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
