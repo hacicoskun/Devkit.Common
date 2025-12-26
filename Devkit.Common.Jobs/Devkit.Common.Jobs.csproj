@@ -4,8 +4,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable> 
         <IsPackable>true</IsPackable>
-        <PackageId>Devkit.Common.Jobs</PackageId>
-        <Version>1.0.0</Version>
+        <PackageId>Devkit.Common.Jobs</PackageId> 
         <Authors>Hacı Coşkun</Authors>
         <Description>Arka plan işleri (Background Jobs) modülü.</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>

@@ -4,8 +4,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
-        <PackageId>Devkit.Common.Identity</PackageId>
-        <Version>1.0.0</Version>
+        <PackageId>Devkit.Common.Identity</PackageId> 
         <Authors>Hacı Coşkun</Authors>
         <Description>Kimlik doğrulama ve yetkilendirme modülü.</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>

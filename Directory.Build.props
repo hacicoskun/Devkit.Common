@@ -4,7 +4,8 @@
     <NoWarn>$(NoWarn);EXTEXP0018</NoWarn>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <LangVersion>preview</LangVersion> <Version>1.0.0</Version>
+    <LangVersion>preview</LangVersion> 
+    <Version>1.0.1</Version>
     <Authors>Hacı Coşkun</Authors>
     <Company>Devkit</Company>
     <Description>Devkit modüler altyapı kütüphanesi.</Description>
