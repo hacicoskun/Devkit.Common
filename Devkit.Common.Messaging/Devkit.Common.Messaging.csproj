@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
+    <PropertyGroup> 
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
@@ -14,16 +13,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MassTransit" Version="8.5.5" />
-        <PackageReference Include="MassTransit.Kafka" Version="8.5.5" />
-        <PackageReference Include="MassTransit.RabbitMQ" Version="8.5.5" />
-        <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.5.5" />
-        <!-- Entity Framework -->
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.11" /> 
-
-        <!-- Configuration / Dependency Injection --> 
-        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.11" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.11" /> 
+        <PackageReference Include="MassTransit" />
+        <PackageReference Include="MassTransit.Kafka" />
+        <PackageReference Include="MassTransit.RabbitMQ" />
+        <PackageReference Include="MassTransit.EntityFrameworkCore" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     </ItemGroup>
     
     <ItemGroup>
