@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Version>1.0.2</Version>
         <IsPackable>true</IsPackable>
         <PackageId>Devkit.Common</PackageId> 
         <Authors>Hacı Coşkun</Authors>

@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk"> 
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
+        <Version>1.0.2</Version>
         <Nullable>enable</Nullable>
         <IsPackable>true</IsPackable>
         <PackageId>Devkit.Common.Logging</PackageId>
