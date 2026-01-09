@@ -20,17 +20,8 @@ Bu kütüphane, dağıtık sistemler ve performans odaklı uygulamalar için kri
 | **Önbellekleme** | **InMemory / Redis / Hybrid Cache** | Uygulamanızın performansını artırmak için esnek önbellek çözümleri. |
 | **Job** | **Hangfire / Quartz** | Uygulamanız için tekrarlayan iş yöneticisi. |
 | **Identity** | **Keycloak / AspnetIdentity** | Kullanıcı ve rol yönetimi. |
-
----
-
-## 🔜 Yol Haritası (Gelecek Özellikler)
-
-Geliştirme sürecindeki heyecan verici eklemelerle kütüphanemizi güçlendirmeye devam ediyoruz:
-
-* 📊 **Logging & Telemetri Bileşenleri:** Merkezi izleme ve analiz için kapsamlı bileşenler.
-* 📦 **Resmi NuGet Paket Yayını:** Kolay kurulum ve yönetim için tüm bileşenlerin NuGet üzerinden erişilebilir hale getirilmesi.
-
----
+| **Log** | **Seq / ELK** | Seq ve ELK entegrasyonu ile merkezi log yönetimi ve performans (Elapsed) takibi. |
+ 
 
 ## 🧩 Hızlı Başlangıç: Dakikalar İçinde Hazır!
 
@@ -75,5 +66,14 @@ builder.Services.AddDevkitIdentity(builder.Configuration, builder.Environment);
 // AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 builder.Services.AddIdentity<AppDbContext>(builder.Configuration, builder.Environment);
 
+//Logging
+builder.Services.AddCustomLogging(builder.Configuration);
+
+//Logging +
+app.UseSerilogRequestLogging(options =>
+{
+    options.GetLevel = (ctx, elapsed, ex) =>
+        ex != null ? LogEventLevel.Error : LogEventLevel.Information;
+});
 
 
