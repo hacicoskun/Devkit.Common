@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Devkit.Common.Logging", "Devkit.Common.Logging\Devkit.Common.Logging.csproj", "{E314B341-CED3-4AB5-9DFC-9CBC1E779453}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{091F6510-3666-4247-BAAA-D544C2861606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{091F6510-3666-4247-BAAA-D544C2861606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{091F6510-3666-4247-BAAA-D544C2861606}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E314B341-CED3-4AB5-9DFC-9CBC1E779453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E314B341-CED3-4AB5-9DFC-9CBC1E779453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E314B341-CED3-4AB5-9DFC-9CBC1E779453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E314B341-CED3-4AB5-9DFC-9CBC1E779453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
