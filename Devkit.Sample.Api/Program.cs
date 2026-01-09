@@ -1,6 +1,7 @@
 using Devkit.Common.Caching.Extensions;
 using Devkit.Common.Identity.Extensions;
 using Devkit.Common.Jobs.Extensions;
+using Devkit.Common.Logging.Extensions;
 using Devkit.Common.Messaging.Extensions;
 using Devkit.Sample.Api.Data;
 using Devkit.Sample.Api.Jobs;
@@ -24,7 +25,7 @@ builder.Services.AddIdentity(builder.Configuration, builder.Environment); //Keyc
 //builder.Services.AddIdentity<AppDbContext>(builder.Configuration, builder.Environment); AspnetIdentity
 builder.Services.AddJobScheduler(builder.Configuration);
 builder.Services.AddTransient<DateTimeLoggerJob>();
-
+builder.Services.AddCustomLogging(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
