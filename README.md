@@ -77,3 +77,6 @@ app.UseSerilogRequestLogging(options =>
 });
 
 
+**## License
+MIT License © 2026 Hacı Coşkun
+**
