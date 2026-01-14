@@ -1,9 +1,11 @@
 ﻿using Devkit.Common.Caching;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Devkit.Sample.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("cache")]
 public class CacheTestController(ICacheService cache) : ControllerBase
 {

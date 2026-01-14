@@ -1,5 +1,7 @@
 ﻿using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
+using Devkit.Common.Identity.Core.Extensions.Keycloak;
 using Devkit.Common.Identity.Core.Interfaces;
 using Devkit.Common.Identity.Core.Models;
 using Devkit.Common.Identity.Options;
@@ -78,19 +80,32 @@ namespace Devkit.Common.Identity.Providers.Keycloak
 
         #region IUserService (CRUD & Management)
 
-        public async Task<string> CreateUserAsync(CreateUserDto userDto)
+        public async Task<string> CreateUserAsync(CreateUserCommand userCommand)
         {
             var token = await GetAdminAccessTokenAsync();
             var url = $"{_options.BaseUrl}/admin/realms/{_options.Realm}/users";
 
+            var attributes = userCommand.Attributes?
+                .ToDictionary(
+                    x => x.Key,
+                    x => new[] { x.Value }
+                );
+
+            var requiredActions = userCommand.RequiredActions
+                .Select(x => x.ToKeycloak())
+                .ToArray();
+
             var newUser = new
             {
-                username = userDto.Username,
-                email = userDto.Email,
-                firstName = userDto.FirstName,
-                lastName = userDto.LastName,
+                username = userCommand.Username,
+                email = userCommand.Email,
+                firstName = userCommand.FirstName,
+                lastName = userCommand.LastName,
                 enabled = true,
-                credentials = new[] { new { type = "password", value = userDto.Password, temporary = false } }
+                credentials = new[] { new { type = "password", value = userCommand.Password, temporary = false } },
+                attributes = attributes,
+                emailVerified = false,
+                requiredActions = requiredActions,
             };
 
             var response = await SendJsonRequestAsync(HttpMethod.Post, url, newUser, token);
@@ -123,14 +138,24 @@ namespace Devkit.Common.Identity.Providers.Keycloak
 
         public async Task DeleteUserAsync(string userId)
         {
+            await LogoutAsync(userId);
+
             var token = await GetAdminAccessTokenAsync();
+            var now = DateTimeOffset.UtcNow.ToUnixTimeSeconds(); 
             var url = $"{_options.BaseUrl}/admin/realms/{_options.Realm}/users/{userId}";
 
-            var request = new HttpRequestMessage(HttpMethod.Delete, url);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var updateModel = new
+            {
+                enabled = false,
+                notBefore = (int)now
+            };
 
-            var response = await httpClient.SendAsync(request);
-            EnsureSuccess(response, "DeleteUser");
+            var response = await SendJsonRequestAsync(HttpMethod.Put, url, updateModel, token);
+            var deleteRequest = new HttpRequestMessage(HttpMethod.Delete, url);
+            deleteRequest.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var deleteResponse = await httpClient.SendAsync(deleteRequest);
+            EnsureSuccess(deleteResponse, "DeleteUser");
         }
 
         public async Task<UserDetailDto> GetUserByIdAsync(string userId)
@@ -166,6 +191,7 @@ namespace Devkit.Common.Identity.Providers.Keycloak
 
             var model = new { enabled = isEnabled };
             var response = await SendJsonRequestAsync(HttpMethod.Put, url, model, token);
+
             EnsureSuccess(response, "SetUserStatus");
         }
 
@@ -207,20 +233,22 @@ namespace Devkit.Common.Identity.Providers.Keycloak
             ]);
 
             var response = await httpClient.PostAsync(url, content);
-            if(!response.IsSuccessStatusCode)
-                 throw new Exception("Keycloak Admin Token alınamadı. Service Account yetkilerini kontrol edin.");
+            if (!response.IsSuccessStatusCode)
+                throw new Exception("Keycloak Admin Token alınamadı. Service Account yetkilerini kontrol edin.");
 
             var jsonString = await response.Content.ReadAsStringAsync();
             dynamic json = JsonConvert.DeserializeObject(jsonString)!;
             return json.access_token;
         }
 
-        private async Task<HttpResponseMessage> SendJsonRequestAsync(HttpMethod method, string url, object content, string token)
+        private async Task<HttpResponseMessage> SendJsonRequestAsync(HttpMethod method, string url, object content,
+            string token)
         {
             var request = new HttpRequestMessage(method, url);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var settings = new JsonSerializerSettings
+                { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var json = JsonConvert.SerializeObject(content, settings);
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 

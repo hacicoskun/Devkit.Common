@@ -1,4 +1,5 @@
-﻿using Devkit.Common.Messaging.Core;
+﻿using Devkit.Common.Identity.Core.Interfaces;
+using Devkit.Common.Messaging.Core;
 using Devkit.Sample.Api.Data;
 using Devkit.Sample.Api.Data.Entities;
 using Devkit.Sample.Api.Messaging.Models.Commands;
@@ -10,14 +11,14 @@ namespace Devkit.Sample.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MessagingTestController(AppDbContext context, IPublisher bus) : ControllerBase
+public class MessagingTestController(AppDbContext context, IPublisher bus,IAuthenticationService authenticationService) : ControllerBase
 {
     [HttpPost("publish")]
     public async Task<IActionResult> PublishOrder(string product, decimal price)
     {
         await using var transaction = await context.Database.BeginTransactionAsync();
         try
-        {
+        { 
             var order = new Order { Product = product, Price = price };
             context.Orders.Add(order); 
 
